@@ -1,4 +1,3 @@
-// src/components/ItemPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -14,13 +13,6 @@ const ItemPage = ({ type }) => {
       const response = await axios.get(`${api}/api/${type}/${id}`);
       setItem(response.data);
       console.log(response.data);
-        // const data = {
-        //     _id: "01",
-        //     name : "Sushil",
-        //     Description: "hi this is a very new thing ",
-        //     AccountType: "Public"
-        // }
-        // setItem(data)
     };
     fetchItem();
   }, [type, id]);

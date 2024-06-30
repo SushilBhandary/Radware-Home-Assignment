@@ -1,4 +1,3 @@
-// src/components/ItemsList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -14,19 +13,6 @@ const ItemslistPage = ({ type }) => {
       const response = await axios.get(`${api}/api/${type}`);
       setItems(response.data);
       console.log(response.data);
-    //   const data = [ {
-    //     _id: "001",
-    //     name: "Sushil",
-    //     accountName: " Account 1 "
-    //   },
-    //   {
-    //     _id: "002",
-    //     name: "Kumar",
-    //     accountName: " Account 2 "
-    //   }
-    // ]
-    // setItems(data);
-
     };
     fetchItems();
   }, [type]);
