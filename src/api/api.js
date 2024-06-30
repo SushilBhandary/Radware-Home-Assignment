@@ -1,2 +1,2 @@
-const api = 'http://localhost:5000'
+const api = 'https://radware-home-assignment2.adaptable.app/'
 export default api
