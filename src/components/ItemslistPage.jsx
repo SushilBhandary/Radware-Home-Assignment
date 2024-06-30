@@ -1,8 +1,9 @@
 // src/components/ItemsList.js
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Typography, Box, Container , Button } from '@mui/material';
+import api from '../api/api'
 
 
 const ItemslistPage = ({ type }) => {
@@ -10,20 +11,21 @@ const ItemslistPage = ({ type }) => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      // const response = await axios.get(`/api/${type}`);
-      // setItems(response.data);
-      const data = [ {
-        _id: "001",
-        name: "Sushil",
-        accountName: " Account 1 "
-      },
-      {
-        _id: "002",
-        name: "Kumar",
-        accountName: " Account 2 "
-      }
-    ]
-    setItems(data);
+      const response = await axios.get(`${api}/api/${type}`);
+      setItems(response.data);
+      console.log(response.data);
+    //   const data = [ {
+    //     _id: "001",
+    //     name: "Sushil",
+    //     accountName: " Account 1 "
+    //   },
+    //   {
+    //     _id: "002",
+    //     name: "Kumar",
+    //     accountName: " Account 2 "
+    //   }
+    // ]
+    // setItems(data);
 
     };
     fetchItems();
@@ -53,7 +55,7 @@ const ItemslistPage = ({ type }) => {
                 </Typography>
                 {items && items.map(item => (
                     
-                  <Link to={`/${type}/${item._id}`}>
+                  <Link to={`/${type}/${item._id}`} key={item._id}>
                     <Button
                     key={item._id}
                     type="submit"
@@ -61,7 +63,7 @@ const ItemslistPage = ({ type }) => {
                     variant="contained"
                     sx={{ margin: "10px"}}
                   >
-                    {item.name || item.accountName}
+                    {type=='users' ?item.name :  item.accountName}
                     </Button>
                   </Link>
                 ))}

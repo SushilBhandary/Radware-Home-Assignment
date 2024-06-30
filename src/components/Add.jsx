@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Typography,TextField, OutlinedInput, Box, Container , Button,Select, MenuItem,InputLabel, FormControl } from '@mui/material';
+import axios from 'axios';
+import api from '../api/api';
 
 const Add= () => {
     const [ selectType, setSelectType] = useState('User')
@@ -9,9 +11,43 @@ const Add= () => {
     const [ phone, setPhone] = useState('')
     const [ description, setDescription] = useState('')
 
-    const handleAdd = (e) => {
+    const handleAdd = async(e) => {
         e.preventDefault()
-        alert('woking')
+        if( selectType == 'User') {
+            if( !name|| !email || !phone ) {
+                alert('Full the fields')
+                return
+            }
+            await axios.post(`${api}/api/users`, {
+                name,
+                email,
+                phone
+            })
+            .then( (res) => {
+                setName('')
+                setEmail('')
+                setPhone('')
+                alert('Created successfully')
+            })
+            .catch(e => console.log(e))
+        } else {
+            if( !name|| !accountType || !description ) {
+                alert('Full the fields')
+                return
+            }
+            await axios.post(`${api}/api/accounts`, {
+                name,
+                type: accountType,
+                description
+            })
+            .then( (res) => {
+                setName('')
+                setAccountType('')
+                setDescription('')
+                alert('Created successfully')
+            })
+            .catch(e => console.log(e))
+        }
     };
     
     const handleSelectType = (e) => {
